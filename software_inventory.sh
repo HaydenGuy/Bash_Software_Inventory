@@ -62,7 +62,7 @@ for program in $program_names; do
     dnf list "$program" 2>/dev/null | awk '
         NR > 3 && !/^Available Packages$/ {
             gsub(/^[ \t]+|[ \t]+$/, "");
-            print $1, $2, $3
+            print $1, "|", $2
         }
     ' >> programs.txt
 
