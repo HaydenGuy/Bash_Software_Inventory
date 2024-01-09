@@ -28,8 +28,8 @@ if [ -e "programs.txt" ]; then
     # Loop breaks when the number of the line count is equal to the num programs number
     while IFS= read -r line && [ "$line_count" -lt "$num_programs" ]; do
 
-        # Calls an information query on each program and adds its name, release and license information to the text file
-        rpm -qi "$line" | awk '/^Name/ || /^Release/ || /^License/' >> programs.txt
+        # Calls an information query on each program and adds its information to the text file
+        rpm -qi "$line" | awk '/^Name/ || /^Version/ || /^Release/ || /^License/' >> programs.txt
 
         # Adds an empty line to text file
         echo "" >> programs.txt
@@ -37,7 +37,7 @@ if [ -e "programs.txt" ]; then
         # Increment the line count
         ((line_count++))
     done < "programs.txt"
-    
+
 else
     echo "progams.txt not found"
 fi
