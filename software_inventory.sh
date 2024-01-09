@@ -14,11 +14,14 @@ for program in "${software[@]}"; do
     rpm -qa | grep -i "$program" >> "programs.txt" 
 done
 
-# Adds an blank line to the programs.txt file
-echo "" >> programs.txt
-
 # Uses wc -l to get the number of lines in the programs.txt file aka num of programs
 num_programs=$(wc -l < programs.txt)
+
+# Adds an blank line to the programs.txt file
+echo "" >> programs.txt
+# Adds a dashed line to the programs.txt file
+echo "----------------------------------------" >> programs.txt
+echo "" >> programs.txt
 
 # If programs.txt exists
 if [ -e "programs.txt" ]; then
@@ -41,6 +44,9 @@ if [ -e "programs.txt" ]; then
 else
     echo "progams.txt not found"
 fi
+
+# Adds a dashed line to the programs.txt file
+echo "----------------------------------------" >> programs.txt
 
 # An array that takes the program name from the name field in txt file and adds its name to array as string
 program_names=$(awk '/Name/ {print $3}' programs.txt)
