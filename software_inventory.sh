@@ -51,8 +51,8 @@ for program in $program_names; do
     # Trim leading and trailing whitespaces
     program=$(echo "$program" | awk '{$1=$1;print}')
 
-    # Run dnf list for each program
-    dnf list "$program" | awk 'NR > 3 {print}' >> programs.txt
+    # Run dnf list for each program, suppress stdout, and append relevant information to programs.txt
+    dnf list "$program" 2>/dev/null | awk 'NR > 3 {print}' >> programs.txt
 
     # Adds an empty line to text file
     echo "" >> programs.txt
