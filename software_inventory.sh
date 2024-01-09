@@ -47,6 +47,8 @@ fi
 
 # Adds a dashed line to the programs.txt file
 echo "----------------------------------------" >> programs.txt
+echo "" >> programs.txt
+echo "Available packages" >> programs.txt
 
 # An array that takes the program name from the name field in txt file and adds its name to array as string
 program_names=$(awk '/Name/ {print $3}' programs.txt)
@@ -65,7 +67,4 @@ for program in $program_names; do
             print $1, "|", $2
         }
     ' >> programs.txt
-
-    # Adds an empty line to text file
-    echo "" >> programs.txt
 done
