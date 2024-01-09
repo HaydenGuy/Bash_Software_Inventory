@@ -52,7 +52,7 @@ for program in $program_names; do
     program=$(echo "$program" | awk '{$1=$1;print}')
 
     # Run dnf list for each program
-    dnf list "$program" | awk 'NR > 1 {print}' >> programs.txt
+    dnf list "$program" | awk 'NR > 3 {print}' >> programs.txt
 
     # Adds an empty line to text file
     echo "" >> programs.txt
