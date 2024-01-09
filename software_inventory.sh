@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of software to check
-software=("maya" "blender" "handbrake")
+software=("maya" "blender" "firefox")
 
 # Deletes the content in programs.txt
 echo -n > "programs.txt"
@@ -42,3 +42,18 @@ else
     echo "progams.txt not found"
 fi
 
+# An array that takes the program name from the name field in txt file and adds its name to array as string
+program_names=$(awk '/Name/ {print $3}' programs.txt)
+
+# Loop through each program name (dont need [@] because its string not individual item)
+for program in $program_names; do
+
+    # Trim leading and trailing whitespaces
+    program=$(echo "$program" | awk '{$1=$1;print}')
+
+    # Run dnf list for each program
+    dnf list "$program" | awk 'NR > 1 {print}' >> programs.txt
+
+    # Adds an empty line to text file
+    echo "" >> programs.txt
+done
